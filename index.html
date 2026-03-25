@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apt 4I Memorial Service 🕊️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #FDF6EC;
+    --blush: #F2C4B0;
+    --coral: #E8775A;
+    --plum: #3D1F3A;
+    --gold: #D4A847;
+    --mint: #B8D8C8;
+    --lilac: #C9B8D8;
+    --text: #2C1A2E;
+    --muted: #7A5F7C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Confetti dots bg */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, var(--blush) 2px, transparent 2px),
+      radial-gradient(circle, var(--mint) 2px, transparent 2px),
+      radial-gradient(circle, var(--lilac) 2px, transparent 2px),
+      radial-gradient(circle, var(--gold) 1.5px, transparent 1.5px);
+    background-size: 120px 120px, 90px 90px, 150px 150px, 70px 70px;
+    background-position: 0 0, 45px 45px, 20px 80px, 60px 10px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .header .tag {
+    display: inline-block;
+    background: var(--plum);
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 99px;
+    margin-bottom: 1.25rem;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 8vw, 3.5rem);
+    line-height: 1.1;
+    color: var(--plum);
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .header .subhead {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 340px;
+    margin: 0.75rem auto 0;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .squiggle {
+    width: 60px;
+    margin: 1.5rem auto;
+    display: block;
+  }
+
+  /* ── DETAILS STRIP ── */
+  .details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--blush);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1.5px solid var(--blush);
+  }
+
+  .detail-cell {
+    background: var(--cream);
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  .detail-cell .emoji { font-size: 18px; display: block; margin-bottom: 4px; }
+  .detail-cell .lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .detail-cell .val { font-size: 14px; font-weight: 500; color: var(--plum); }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+    background: rgba(61,31,58,0.07);
+    border-radius: 12px;
+    padding: 4px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+
+  .tab-btn.active {
+    background: var(--plum);
+    color: var(--cream);
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.75rem;
+    border: 1.5px solid var(--blush);
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--plum);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── FORM ── */
+  .field { margin-bottom: 1rem; }
+  .field label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+
+  .field input, .field select {
+    width: 100%;
+    padding: 11px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    border: 1.5px solid #E8D8E6;
+    border-radius: 10px;
+    background: var(--cream);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .field input:focus, .field select:focus { border-color: var(--coral); }
+
+  .rsvp-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .rsvp-choice {
+    padding: 11px;
+    border: 1.5px solid #E8D8E6;
+    border-radius: 10px;
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .rsvp-choice.yes-active { border-color: #1D9E75; background: #E1F5EE; color: #0F6E56; }
+  .rsvp-choice.no-active  { border-color: var(--coral); background: #FAECE7; color: #993C1D; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--plum);
+    color: var(--cream);
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+
+  .submit-btn:hover { opacity: 0.88; }
+  .submit-btn:active { transform: scale(0.98); }
+
+  .success-box {
+    text-align: center;
+    padding: 2rem 1rem;
+    display: none;
+  }
+
+  .success-box .big-emoji { font-size: 40px; margin-bottom: 0.75rem; }
+  .success-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--plum); margin-bottom: 0.4rem; }
+  .success-box p { font-size: 14px; color: var(--muted); }
+
+  /* ── GUEST LIST ── */
+  .counts {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .count-chip {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .count-chip .n { font-size: 22px; font-weight: 700; display: block; line-height: 1.1; }
+  .chip-yes { background: #E1F5EE; color: #0F6E56; }
+  .chip-no  { background: #FAECE7; color: #993C1D; }
+  .chip-wait { background: #FFF8E6; color: #8a6500; }
+
+  .guest-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #E8D8E6;
+  }
+
+  .guest-item:last-child { border-bottom: none; }
+
+  .guest-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--lilac);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600;
+    color: var(--plum);
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+
+  .guest-info { flex: 1; }
+  .guest-name { font-size: 14px; font-weight: 500; color: var(--plum); }
+  .guest-meta { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+  .status-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  .badge-confirmed { background: #E1F5EE; color: #0F6E56; }
+  .badge-pending   { background: #FFF8E6; color: #8a6500; }
+  .badge-declined  { background: #FAECE7; color: #993C1D; }
+
+  .empty-state {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .empty-state .e { font-size: 28px; margin-bottom: 8px; }
+
+  /* ── ADMIN PANEL ── */
+  .admin-login { margin-top: 2rem; }
+
+  .admin-toggle {
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: block;
+    margin: 0 auto;
+    padding: 4px;
+  }
+
+  .admin-panel { display: none; }
+  .admin-panel.open { display: block; }
+
+  .admin-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 0.75rem;
+  }
+
+  .admin-form input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1.5px solid #E8D8E6;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: var(--cream);
+    color: var(--text);
+    outline: none;
+  }
+
+  .admin-form input:focus { border-color: var(--plum); }
+
+  .admin-form button {
+    padding: 9px 16px;
+    background: var(--plum);
+    color: var(--cream);
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .admin-err {
+    font-size: 12px;
+    color: var(--coral);
+    margin-top: 6px;
+    text-align: center;
+    display: none;
+  }
+
+  .admin-view { display: none; }
+  .admin-view.open { display: block; }
+
+  .admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .admin-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--plum);
+  }
+
+  .logout-btn {
+    background: none;
+    border: 1px solid #E8D8E6;
+    padding: 5px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .pending-item {
+    background: #FFFBF0;
+    border: 1px solid #F0E0A0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+
+  .pending-name { font-size: 14px; font-weight: 500; color: var(--plum); margin-bottom: 2px; }
+  .pending-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+  .action-btns { display: flex; gap: 8px; }
+
+  .approve-btn, .decline-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .approve-btn { background: #E1F5EE; color: #0F6E56; }
+  .decline-btn { background: #FAECE7; color: #993C1D; }
+  .approve-btn:hover, .decline-btn:hover { opacity: 0.75; }
+
+  .no-pending { font-size: 13px; color: var(--muted); text-align: center; padding: 1rem 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2.5rem;
+    opacity: 0.7;
+  }
+
+  /* ── PHOTOS ── */
+  .hero-bg {
+    width: 100%;
+    height: 340px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.28) 100%);
+    border-radius: 20px;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .gallery-cell {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .gallery-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  @keyframes popIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
+  .card { animation: popIn 0.3s ease; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 480px) {
+    .container { padding: 1rem 1rem 3rem; }
+
+    .header { padding: 2rem 0 1.5rem; }
+    .header .subhead { font-size: 14px; max-width: 100%; }
+
+    /* Prevent iOS auto-zoom on input focus — must be 16px+ */
+    .field input, .field select, .admin-form input {
+      font-size: 16px;
+    }
+
+    /* Bigger tap targets for buttons */
+    .rsvp-choice { padding: 14px 10px; font-size: 14px; }
+    .submit-btn  { padding: 15px; font-size: 16px; }
+    .tab-btn     { padding: 11px 6px; font-size: 13px; }
+    .approve-btn, .decline-btn { padding: 11px; font-size: 14px; }
+
+    /* Hero slightly shorter on small screens */
+    .hero-bg { height: 240px; }
+
+    /* 2-col gallery on very narrow phones */
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Details card — stack location full-width, keep others 2-col */
+    .card { padding: 1.25rem; }
+
+    /* Admin form stacks vertically */
+    .admin-form { flex-direction: column; }
+    .admin-form button { width: 100%; padding: 11px; }
+
+    /* Count chips smaller label */
+    .count-chip { font-size: 11px; padding: 8px 4px; }
+    .count-chip .n { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="tag">You're invited 🕊️</div>
+    <h1>Apartment 4I 🕊️<br><em>Memorial Service</em></h1>
+    <p class="subhead">We done fucked Willoughby up with this one. BYOB, BYOW and bring a friend — we pouring one out for Apt 4I. Darty starts at 1pm and go till we lose our security deposit. We'll be up on the roof if the weather's nice or down in the game room. Hope to see y'all there!</p>
+    <svg class="squiggle" viewBox="0 0 60 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 6 C8 2, 14 10, 20 6 S32 2, 38 6 S50 10, 58 6" stroke="#E8775A" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- HERO PHOTO -->
+  <div class="hero-bg">
+    <img src="IMG_5868.jpeg" alt="Apt 4I" />
+  </div>
+
+  <!-- GALLERY GRID -->
+  <div class="gallery-grid">
+    <div class="gallery-cell"><img src="IMG_5147.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_5844.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_4237.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_4238.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_4881.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_7032.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_7378.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_0941.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_1761.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_1604.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_2579.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_4433.jpeg" alt="" /></div>
+    <div class="gallery-cell"><img src="IMG_4324.jpeg" alt="" /></div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="details">
+    <div class="detail-cell">
+      <span class="emoji">📅</span>
+      <div class="lbl">Date</div>
+      <div class="val">April 26</div>
+    </div>
+    <div class="detail-cell">
+      <span class="emoji">🕐</span>
+      <div class="lbl">Time</div>
+      <div class="val">1:00 PM</div>
+    </div>
+    <div class="detail-cell" style="grid-column: span 2;">
+      <span class="emoji">📍</span>
+      <div class="lbl">Location</div>
+      <div class="val">961 Willoughby Ave, Brooklyn, NY <span style="font-weight:300; font-size:12px;">(buzz 4I)</span></div>
+    </div>
+    <div class="detail-cell">
+      <span class="emoji">🥂</span>
+      <div class="lbl">Hosted by</div>
+      <div class="val">Jason, Herb & Orv</div>
+    </div>
+    <div class="detail-cell">
+      <span class="emoji">📞</span>
+      <div class="lbl">Questions?</div>
+      <div class="val" id="contact-num">—</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('rsvp')">RSVP</button>
+    <button class="tab-btn" onclick="showTab('guests')">Guest list</button>
+  </div>
+
+  <!-- RSVP TAB -->
+  <div id="tab-rsvp">
+    <div class="card">
+      <div class="card-title">Will you be joining us?</div>
+
+      <div id="rsvp-form">
+        <div class="field">
+          <label>Your name</label>
+          <input type="text" id="f-name" placeholder="First and last name" />
+        </div>
+        <div class="field">
+          <label>Are you coming?</label>
+          <div class="rsvp-toggle">
+            <button class="rsvp-choice" id="btn-yes" onclick="selectRsvp('yes')">🎉 Yes, I'll be there!</button>
+            <button class="rsvp-choice" id="btn-no"  onclick="selectRsvp('no')">😢 Can't make it</button>
+          </div>
+        </div>
+        <div class="field" id="field-plus" style="display:none;">
+          <label>Bringing anyone? (+1s)</label>
+          <select id="f-plus">
+            <option value="0">Just me</option>
+            <option value="1">+1 guest</option>
+            <option value="2">+2 guests</option>
+            <option value="3">+3 guests</option>
+          </select>
+        </div>
+        <button class="submit-btn" onclick="submitRsvp()">Send my RSVP ✨</button>
+      </div>
+
+      <div class="success-box" id="success-box">
+        <div class="big-emoji" id="success-emoji">🎊</div>
+        <h3 id="success-title">You're on the list!</h3>
+        <p id="success-msg">We can't wait to celebrate with you. See you soon!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUESTS TAB -->
+  <div id="tab-guests" style="display:none;">
+    <div class="card">
+      <div class="card-title">Who's coming 🎈</div>
+      <div class="counts" id="counts">
+        <div class="count-chip chip-yes"><span class="n" id="cnt-yes">0</span>Coming</div>
+        <div class="count-chip chip-wait"><span class="n" id="cnt-wait">0</span>Pending</div>
+        <div class="count-chip chip-no"><span class="n" id="cnt-no">0</span>Decline</div>
+      </div>
+      <div id="guest-list-wrap"></div>
+    </div>
+
+    <!-- Admin section -->
+    <div class="admin-login">
+      <button class="admin-toggle" onclick="toggleAdminLogin()">Hosts: manage RSVPs</button>
+      <div class="admin-panel" id="admin-panel">
+        <div class="admin-form">
+          <input type="password" id="admin-pw" placeholder="Host password" onkeydown="if(event.key==='Enter') adminLogin()" />
+          <button onclick="adminLogin()">Enter</button>
+        </div>
+        <div class="admin-err" id="admin-err">Incorrect password</div>
+      </div>
+    </div>
+
+    <div class="admin-view" id="admin-view">
+      <div class="card" style="margin-top:1rem;">
+        <div class="admin-header">
+          <div class="admin-title">Host dashboard 🗝️</div>
+          <button class="logout-btn" onclick="adminLogout()">Log out</button>
+        </div>
+        <div id="pending-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Rest in peace, Apt 4I 🕊️ — what a run it was</div>
+</div>
+
+<script>
+  // ── PHONE NUMBER ──
+  const PHONES = ['(646) 403-2076', '(917) 327-5293', '(347) 781-3982'];
+  document.getElementById('contact-num').textContent = PHONES[Math.floor(Math.random() * PHONES.length)];
+
+  // ── CONFIG ──
+  const HOST_PASSWORD = 'apt4eye';
+  // Formspree endpoint — replace XXXXXXXX with your form ID from formspree.io
+  const FORMSPREE_URL = 'https://formspree.io/f/XXXXXXXX';
+
+  // ── BADGE FN ──
+  const BADGES = ['🌟','🎈','🥂','🌸','✨','🦋','🎀','🌙','🍾','🌺'];
+  function badge(name) { return BADGES[name.charCodeAt(0) % BADGES.length]; }
+
+  // ── EMOJI AVATARS ──
+  const AVATAR_COLORS = ['#C9B8D8','#B8D8C8','#F2C4B0','#FAD7A0','#AED6F1','#F9E0E0'];
+  function avatarColor(name) { return AVATAR_COLORS[name.charCodeAt(0) % AVATAR_COLORS.length]; }
+  function initials(name) { const p = name.trim().split(' '); return (p[0][0] + (p[1]?.[0] || '')).toUpperCase(); }
+
+  // ── STATE (localStorage) ──
+  function getGuests() { return JSON.parse(localStorage.getItem('soiree_guests') || '[]'); }
+  function saveGuests(g) { localStorage.setItem('soiree_guests', JSON.stringify(g)); }
+
+  // ── TABS ──
+  function showTab(t) {
+    document.getElementById('tab-rsvp').style.display    = t === 'rsvp'    ? 'block' : 'none';
+    document.getElementById('tab-guests').style.display  = t === 'guests'  ? 'block' : 'none';
+    document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (i===0)===(t==='rsvp')));
+    if (t === 'guests') renderGuests();
+  }
+
+  // ── RSVP ──
+  let rsvpChoice = null;
+
+  function selectRsvp(v) {
+    rsvpChoice = v;
+    document.getElementById('btn-yes').className = 'rsvp-choice' + (v==='yes' ? ' yes-active' : '');
+    document.getElementById('btn-no').className  = 'rsvp-choice' + (v==='no'  ? ' no-active'  : '');
+    document.getElementById('field-plus').style.display = v === 'yes' ? 'block' : 'none';
+  }
+
+  async function submitRsvp() {
+    const name = document.getElementById('f-name').value.trim();
+    if (!name) { document.getElementById('f-name').focus(); return; }
+    if (!rsvpChoice) { alert('Please select yes or no!'); return; }
+    const plus = parseInt(document.getElementById('f-plus').value || '0');
+    const total = rsvpChoice === 'yes' ? 1 + plus : 0;
+
+    // Save locally
+    const guests = getGuests();
+    guests.push({ name, rsvp: rsvpChoice, plus, total, status: 'pending', ts: Date.now() });
+    saveGuests(guests);
+
+    // Send to Formspree (non-blocking — page works even without it)
+    try {
+      await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, rsvp: rsvpChoice, plus_ones: plus })
+      });
+    } catch(e) { /* silent fail — local save already happened */ }
+
+    // Show success
+    document.getElementById('rsvp-form').style.display = 'none';
+    const box = document.getElementById('success-box');
+    box.style.display = 'block';
+    if (rsvpChoice === 'yes') {
+      document.getElementById('success-emoji').textContent = '🎊';
+      document.getElementById('success-title').textContent = "You're on the list!";
+      document.getElementById('success-msg').textContent = "We can't wait to celebrate with you. See you soon!";
+    } else {
+      document.getElementById('success-emoji').textContent = '💌';
+      document.getElementById('success-title').textContent = "We'll miss you!";
+      document.getElementById('success-msg').textContent = "Thanks for letting us know. We're sending you all the good vibes!";
+    }
+  }
+
+  // ── GUEST LIST ──
+  function renderGuests() {
+    const guests = getGuests();
+    const confirmed = guests.filter(g => g.status === 'confirmed' && g.rsvp === 'yes');
+    const declined  = guests.filter(g => g.status === 'confirmed' && g.rsvp === 'no');
+    const pending   = guests.filter(g => g.status === 'pending');
+
+    document.getElementById('cnt-yes').textContent  = confirmed.reduce((s,g) => s + g.total, 0);
+    document.getElementById('cnt-no').textContent   = declined.length;
+    document.getElementById('cnt-wait').textContent = pending.length;
+
+    const wrap = document.getElementById('guest-list-wrap');
+    const visible = confirmed;
+
+    if (!visible.length) {
+      wrap.innerHTML = '<div class="empty-state"><div class="e">🎈</div>No confirmed guests yet — be the first!</div>';
+      return;
+    }
+
+    wrap.innerHTML = visible.map(g => `
+      <div class="guest-item">
+        <div class="guest-avatar" style="background:${avatarColor(g.name)}">${initials(g.name)}</div>
+        <div class="guest-info">
+          <div class="guest-name">${g.name} ${badge(g.name)}</div>
+          <div class="guest-meta">${g.total > 1 ? `party of ${g.total}` : 'flying solo'}</div>
+        </div>
+        <span class="status-badge badge-confirmed">Coming 🎉</span>
+      </div>
+    `).join('');
+  }
+
+  // ── ADMIN ──
+  let adminOpen = false;
+
+  function toggleAdminLogin() {
+    const panel = document.getElementById('admin-panel');
+    adminOpen = !adminOpen;
+    panel.classList.toggle('open', adminOpen);
+  }
+
+  function adminLogin() {
+    const pw = document.getElementById('admin-pw').value;
+    const err = document.getElementById('admin-err');
+    if (pw === HOST_PASSWORD) {
+      document.getElementById('admin-panel').classList.remove('open');
+      document.getElementById('admin-view').classList.add('open');
+      err.style.display = 'none';
+      renderAdminPanel();
+    } else {
+      err.style.display = 'block';
+    }
+  }
+
+  function adminLogout() {
+    document.getElementById('admin-view').classList.remove('open');
+    document.getElementById('admin-pw').value = '';
+  }
+
+  function renderAdminPanel() {
+    const guests = getGuests();
+    const pending = guests.filter(g => g.status === 'pending');
+    const wrap = document.getElementById('pending-list');
+
+    if (!pending.length) {
+      wrap.innerHTML = '<div class="no-pending">🎉 No pending RSVPs — all caught up!</div>';
+      return;
+    }
+
+    wrap.innerHTML = pending.map((g, _) => {
+      const idx = guests.findIndex(x => x.ts === g.ts);
+      const plusLabel = g.rsvp === 'yes' ? (g.plus > 0 ? `+${g.plus} guest${g.plus > 1 ? 's' : ''}` : 'just them') : 'declining';
+      return `
+        <div class="pending-item" id="pend-${g.ts}">
+          <div class="pending-name">${g.name} — ${g.rsvp === 'yes' ? '🎉 Coming' : '😢 Declining'}</div>
+          <div class="pending-meta">${plusLabel}</div>
+          <div class="action-btns">
+            <button class="approve-btn" onclick="resolveRsvp(${g.ts}, 'confirmed')">✓ Confirm</button>
+            <button class="decline-btn" onclick="resolveRsvp(${g.ts}, 'rejected')">✕ Remove</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function resolveRsvp(ts, action) {
+    const guests = getGuests();
+    const idx = guests.findIndex(g => g.ts === ts);
+    if (idx === -1) return;
+    if (action === 'confirmed') {
+      guests[idx].status = 'confirmed';
+    } else {
+      guests.splice(idx, 1);
+    }
+    saveGuests(guests);
+    renderAdminPanel();
+    renderGuests();
+  }
+</script>
+</body>
+</html>
